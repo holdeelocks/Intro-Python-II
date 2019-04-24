@@ -10,16 +10,16 @@ class Item:
 
         if valid_item:
             player.inventory.append(self)
-            print(f'{player} has put {self.name} in their inventory')
+            print(f'{player.name} has put {self.name} in their inventory')
         else:
             print(
-                f'Sorry {player} you cannot pick up an item that is not here')
+                f'Sorry {player.name} you cannot pick up an item that is not here')
 
     def on_drop(self, player):
         valid_item = player.inventory.remove(self)
 
         if valid_item:
             player.current_room.add_item(self)
-            print(f"{player} has dropped {self.name} from their inventory")
+            print(f"{player.name} has dropped {self.name} from their inventory")
         else:
-            print(f"{player}'s inventory doesn't have an item by that name")
+            print(f"{player.name}'s inventory doesn't have an item by that name")

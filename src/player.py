@@ -25,7 +25,7 @@ class Player:
 
     #     self.inventory.remove(item)
 
-    # def get_item(self, item_name):
-    #     for item in self.inventory:
-    #         if item.name == item_name:
-    #             return item
+    def get_item(self, item_name):
+        for item in self.inventory:
+            if item.name == item_name:
+                return item
