@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -38,6 +40,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player('Player_One', 'outside')
 
 # Write a loop that:
 #
@@ -53,8 +56,8 @@ room['treasure'].s_to = room['narrow']
 directions = ["east", "west", "north", "south"]
 response = ""
 while response not in directions:
-    # print(f'{Player} is in room {player.current_room.name} \n')
-    # print(f'{player.current_room.description}')
+    print(f'{player} is in room {player.current_room.name} \n')
+    print(f'{player.current_room.description}')
     response = input(
         "What would you like to do?\nChoose a cardinal direction (east/west/north/south)\n")
     response = response.split(' ')
