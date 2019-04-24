@@ -1,11 +1,13 @@
 class Item:
-    def __init__(self, name, damage, description):
+    def __init__(self, name, damage, about):
         self.name = name
         self.damage = damage
-        self.description = description
+        self.about = about
 
     def on_take(self, player):
-        valid_item = player.current_room.inventory.remove(self)
+        room_items = player.current_room.items
+        valid_item = room_items.remove(self)
+
         if valid_item:
             player.inventory.append(self)
             print(f'{player} has put {self.name} in their inventory')

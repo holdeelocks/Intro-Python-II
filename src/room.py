@@ -8,10 +8,20 @@ class Room:
         self.description = description
         self.items = []
 
-    def remove(self, item):
-        valid_item = self.items.remove(item)
+    def get_item(self, item_name):
+        for item in self.items:
+            if item.name == item_name:
+                return item
 
-        if valid_item:
-            print(f'You have removed {valid_item} from the room')
+    def add_item(self, item):
+        self.items.append(item)
+
+    def remove(self, item_name):
+        item = self.get_item(item_name)
+
+        self.items.remove(item)
+
+        if item:
+            print(f'You have removed {item} from the room')
         else:
             print('There is no item by that name in the room')

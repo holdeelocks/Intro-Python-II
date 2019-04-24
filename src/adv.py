@@ -40,7 +40,10 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player('Player_One', 'outside')
+player = Player('Randy BoBandy', 'outside')
+prison_shank = Item('Stabby', 10, 'good for stabbin')
+personality_complex = Item('Existential Dread', -10,
+                           """so much angst and dread that it has manifested itself as a physical object""")
 
 # Write a loop that:
 #
@@ -55,44 +58,54 @@ player = Player('Player_One', 'outside')
 
 directions = ["east", "west", "north", "south"]
 response = ""
-while response not in directions:
-    print(f'{player} is in room {player.current_room.name} \n')
+while response != "q":
+    print(f'{player.name} is in {player.location} \n')
     print(f'{player.current_room.description}')
     response = input(
         "What would you like to do?\nChoose a cardinal direction (east/west/north/south)\n")
     response = response.split(' ')
+
     if len(response) == 1:
+        room = player.current_room
+
         if response[0] == "north":
-            player.current_room = player.current_room.n_to
+            player.change_room(room.n_to)
             print("You head to the north and find....\n")
         elif response[0] == "east":
-            player.current_room = player.current_room.e_to
+            player.change_room(room.e_to)
             print("You head to the east and find...\n")
         elif response[0] == "west":
-            player.current_room = player.current_room.w_to
+            player.change_room(room.w_to)
             print("You head to the west and find....\n")
         elif response[0] == "south":
-            player.current_room = player.current_room.s_to
+            player.change_room(room.s_to)
             print("You go the only other direction left and find...\n")
         elif response[0] == "q":
-            print("This game was too cool for you anyways!. Bye Felicia")
+            print("This game was too cool for you anyways! Bye Felicia\n")
             quit()
+        else:
+            print("Sorry that's not a valid direction \n")
     else:
         verb = response[0]
         item = response[1]
+
         if verb == 'drop':
-            confirm = input("Are you sure you'd like to drop that item?")
+            confirm = input(
+                f"Are you sure you'd like to drop the {item.name}?\n")
             if confirm == 'yes':
                 item.on_drop(player)
-                print('You dropped the item')
+                print(f'You dropped the {item.name}\n')
             else:
-                print('You did not drop the item')
+                print(f'You did not drop the {item.name}\n')
         elif verb == 'take' or verb == 'get':
-            confirm = input('Would you like to take that item?')
+            print(
+                f'You inspect the {item.name} and recognize it as the {item.about}')
+            confirm = input(f'Would you like to take the {item.name}?\n')
             if confirm == 'yes':
                 item.on_take(player)
-                print("You took the item")
+                print(f"You took the {item.name}\n")
             else:
-                print("You left the item in the room")
+                print(
+                    f"You left the {item.name} in the {player.location}\n")
         else:
-            print("I didn't understand that.\n")
+            print("Sorry, that's not a valid command.\n")
