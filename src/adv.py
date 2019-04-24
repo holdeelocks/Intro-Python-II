@@ -63,12 +63,16 @@ while response not in directions:
     response = response.split(' ')
     if len(response) == 1:
         if response[0] == "north":
+            player.current_room = player.current_room.n_to
             print("You head to the north and find....\n")
         elif response[0] == "east":
+            player.current_room = player.current_room.e_to
             print("You head to the east and find...\n")
         elif response[0] == "west":
-            print("You head to the north and find....\n")
+            player.current_room = player.current_room.w_to
+            print("You head to the west and find....\n")
         elif response[0] == "south":
+            player.current_room = player.current_room.s_to
             print("You go the only other direction left and find...\n")
         elif response[0] == "q":
             print("This game was too cool for you anyways!. Bye Felicia")
@@ -79,12 +83,14 @@ while response not in directions:
         if verb == 'drop':
             confirm = input("Are you sure you'd like to drop that item?")
             if confirm == 'yes':
+                item.on_drop(player)
                 print('You dropped the item')
             else:
                 print('You did not drop the item')
-        elif verb == 'take':
+        elif verb == 'take' or verb == 'get':
             confirm = input('Would you like to take that item?')
             if confirm == 'yes':
+                item.on_take(player)
                 print("You took the item")
             else:
                 print("You left the item in the room")

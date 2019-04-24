@@ -8,13 +8,8 @@ class Player:
         self.name = name
         self.inventory = []
 
-    def take_item(self, item):
-        self.inventory.append(item)
+    def get_room(self):
+        return self.current_room
 
-    def drop_item(self, item):
-        valid_item = self.inventory.remove(item)
-
-        if valid_item:
-            print('That item has been removed')
-        else:
-            print("You can't drop an item you don't have!")
+    def change_room(self, new_room):
+        self.current_room = new_room
