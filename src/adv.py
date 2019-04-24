@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
-from item import Item
+from item import Item, Weapon
+
 
 # Declare all the rooms
 
@@ -41,8 +42,8 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Randy BoBandy', 'outside')
-weapon = Item('Prison Shank', 10, 'good for stabbin')
-personality_complex = Item('Existential Dread', -10,
+weapon = Weapon('Prison Shank', 10, 'good for stabbin')
+personality_complex = Item('Existential Dread',
                            """so much angst and dread that it has manifested itself as a physical object""")
 
 room['overlook'].add_item(weapon)

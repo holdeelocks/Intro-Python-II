@@ -1,7 +1,6 @@
 class Item:
-    def __init__(self, name, damage, about):
+    def __init__(self, name, about):
         self.name = name
-        self.damage = damage
         self.about = about
 
     def on_take(self, player):
@@ -23,3 +22,10 @@ class Item:
             print(f"{player.name} has dropped {self.name} from their inventory")
         else:
             print(f"{player.name}'s inventory doesn't have an item by that name")
+
+
+class Weapon(Item):
+    def __init__(self, name, damage, about):
+        self.name = name
+        self.damage = damage
+        self.about = about
