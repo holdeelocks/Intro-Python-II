@@ -25,7 +25,6 @@ class Item:
 
 
 class Weapon(Item):
-    def __init__(self, name, damage, about):
-        self.name = name
+    def __init__(self, damage):
         self.damage = damage
-        self.about = about
+        super().__init__(self)

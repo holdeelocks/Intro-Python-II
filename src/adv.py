@@ -42,7 +42,9 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Randy BoBandy', 'outside')
-weapon = Weapon('Prison Shank', 10, 'good for stabbin')
+weapon = Weapon(10)
+weapon.name = "Prison Shank"
+weapon.about = "good for stabbin"
 personality_complex = Item('Existential Dread',
                            """so much angst and dread that it has manifested itself as a physical object""")
 
