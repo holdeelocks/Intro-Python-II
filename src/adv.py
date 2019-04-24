@@ -49,3 +49,24 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+directions = ["east", "west", "north", "south"]
+response = ""
+while response not in directions:
+    # print(f'{Player} is in room {player.current_room.name} \n')
+    # print(f'{player.current_room.description}')
+    response = input(
+        "What would you like to do?\nChoose a cardinal direction (east/west/north/south)\n")
+    if response == "north":
+        print("You head to the north and find....\n")
+    elif response == "east":
+        print("You head to the east and find...\n")
+    elif response == "west":
+        print("You head to the north and find....\n")
+    elif response == "south":
+        print("You go the only other direction left and find...\n")
+    elif response == "q":
+        print("This game was too cool for you anyways!. Bye Felicia")
+        quit()
+    else:
+        print("I didn't understand that.\n")
