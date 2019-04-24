@@ -57,16 +57,33 @@ while response not in directions:
     # print(f'{player.current_room.description}')
     response = input(
         "What would you like to do?\nChoose a cardinal direction (east/west/north/south)\n")
-    if response == "north":
-        print("You head to the north and find....\n")
-    elif response == "east":
-        print("You head to the east and find...\n")
-    elif response == "west":
-        print("You head to the north and find....\n")
-    elif response == "south":
-        print("You go the only other direction left and find...\n")
-    elif response == "q":
-        print("This game was too cool for you anyways!. Bye Felicia")
-        quit()
+    response = response.split(' ')
+    if len(response) == 1:
+        if response[0] == "north":
+            print("You head to the north and find....\n")
+        elif response[0] == "east":
+            print("You head to the east and find...\n")
+        elif response[0] == "west":
+            print("You head to the north and find....\n")
+        elif response[0] == "south":
+            print("You go the only other direction left and find...\n")
+        elif response[0] == "q":
+            print("This game was too cool for you anyways!. Bye Felicia")
+            quit()
     else:
-        print("I didn't understand that.\n")
+        verb = response[0]
+        item = response[1]
+        if verb == 'drop':
+            confirm = input("Are you sure you'd like to drop that item?")
+            if confirm == 'yes':
+                print('You dropped the item')
+            else:
+                print('You did not drop the item')
+        elif verb == 'take':
+            confirm = input('Would you like to take that item?')
+            if confirm == 'yes':
+                print("You took the item")
+            else:
+                print("You left the item in the room")
+        else:
+            print("I didn't understand that.\n")
