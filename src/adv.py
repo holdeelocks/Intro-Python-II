@@ -69,7 +69,7 @@ while True:
     print(f'{player.current_room.description}')
     room = player.current_room
     exits = room.get_exits()
-    print('You may go these directions:\t')
+    print('You notice there are exits to the...')
     for path in exits:
         print(f"{path}\t")
 
@@ -78,7 +78,7 @@ while True:
         for item in room.items:
             print(f"{item.name}, {item.about}\n")
     response = input(
-        "What would you like to do?\n")
+        "What would you like to do?\n--> ")
 
     response = response.split(' ')
 
@@ -87,11 +87,15 @@ while True:
         print(f"You head to the {response[0]} and find....\n")
 
     elif response[0] == 'i' or response[0] == 'inventory':
-        print('You have the following items:\n')
-        for item in player.inventory:
-            print(f"{item.name}, {item.about}")
+        if len(player.inventory) > 0:
+            print('You have the following items:')
+            for item in player.inventory:
+                print(f"{item.name}, {item.about}\n")
+        else:
+            print(f"Sorry {player.name}, your inventory is empty.\n\n\n\n\n")
     elif response[0] == 'q':
-        print(f"Fine {player.name}, we didn't want you to play anyways")
+        print(
+            f"\n\n\n\n\nFine {player.name}, we didn't want you to play anyways")
         break
     elif len(response) > 1:
         verb = response[0]
