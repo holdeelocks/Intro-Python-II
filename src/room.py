@@ -7,6 +7,23 @@ class Room:
         self.name = name
         self.description = description
         self.items = []
+        self.n_to = None
+        self.e_to = None
+        self.s_to = None
+        self.w_to = None
+
+    def get_exits(self):
+        directions = []
+        if self.n_to is not None:
+            directions.append('north')
+        if self.e_to is not None:
+            directions.append('east')
+        if self.w_to is not None:
+            directions.append('west')
+        if self.s_to is not None:
+            directions.append('south')
+
+        return directions
 
     def get_item(self, item_name):
         for item in self.items:

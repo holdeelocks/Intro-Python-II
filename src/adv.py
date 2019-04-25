@@ -63,41 +63,29 @@ room['overlook'].add_item(weapon)
 directions = ["east", "west", "north", "south"]
 response = ""
 
-while response != "q" or response[0] != 'q':
+while True:
     print(f'{player.name} is in {player.location} \n')
     print(f'{player.current_room.description}')
+    room = player.current_room
+    exits = room.get_exits()
+    print('You may go these directions:\n')
+    for path in exits:
+        print(f"{path}\t")
 
     response = input(
         "What would you like to do?\nChoose a cardinal direction (east/west/north/south)\n")
 
     response = response.split(' ')
-    room = player.current_room
 
-    if len(response) == 1:
-        if response[0] == "north":
-            player.change_room(room.n_to)
-            print("You head to the north and find....\n")
+    if response[0] in directions:
+        player.change_room(response[0])
+        print(f"You head to the {response[0]} and find....\n")
 
-        elif response[0] == "east":
-            player.change_room(room.e_to)
-            print("You head to the east and find...\n")
-
-        elif response[0] == "west":
-            player.change_room(room.w_to)
-            print("You head to the west and find....\n")
-
-        elif response[0] == "south":
-            player.change_room(room.s_to)
-            print("You go the only other direction left and find...\n")
-
-        elif response[0] == "q":
-            print("This game was too cool for you anyways! Bye Felicia\n")
-            quit()
-
-        else:
-            print("Sorry that's not a valid direction \n")
-
-    else:
+    elif response[0] == 'i' or response[0] == 'inventory':
+        print('You have the following items:\n')
+        for item in player.inventory:
+            print(f"{item.name}, used for {item.description}")
+    elif len(response) == 2:
         verb = response[0]
         item_name = response[1]
 
@@ -127,5 +115,5 @@ while response != "q" or response[0] != 'q':
             else:
                 print(
                     f"You left the {item.name} in the {player.location}\n")
-        else:
-            print("Sorry, that's not a valid command.\n")
+    else:
+        print("Sorry, that's not a valid command.\n")
