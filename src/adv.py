@@ -41,14 +41,15 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player('Randy BoBandy', 'outside')
-weapon = Weapon(10)
-weapon.name = "Prison Shank"
-weapon.about = "good for stabbin"
+player = Player('Randy BoBandy', room['outside'])
+weapon = Weapon(10, "prison shank", "good for stabbin")
+# weapon.name = "Prison Shank"
+# weapon.about = "good for stabbin"
 personality_complex = Item('Existential Dread',
                            """so much angst and dread that it has manifested itself as a physical object""")
 
 room['overlook'].add_item(weapon)
+room['foyer'].add_item(weapon)
 # Write a loop that:
 #
 # * Prints the current room name
@@ -64,16 +65,20 @@ directions = ["east", "west", "north", "south"]
 response = ""
 
 while True:
-    print(f'{player.name} is in {player.location} \n')
+    print(f'{player.name} is in {player.current_room.name} \n')
     print(f'{player.current_room.description}')
     room = player.current_room
     exits = room.get_exits()
-    print('You may go these directions:\n')
+    print('You may go these directions:\t')
     for path in exits:
         print(f"{path}\t")
 
+    if len(room.items) > 0:
+        print('\nYou notice these items in the room:')
+        for item in room.items:
+            print(f"{item.name}, {item.about}\n")
     response = input(
-        "What would you like to do?\nChoose a cardinal direction (east/west/north/south)\n")
+        "What would you like to do?\n")
 
     response = response.split(' ')
 
@@ -84,10 +89,13 @@ while True:
     elif response[0] == 'i' or response[0] == 'inventory':
         print('You have the following items:\n')
         for item in player.inventory:
-            print(f"{item.name}, used for {item.description}")
-    elif len(response) == 2:
+            print(f"{item.name}, {item.about}")
+    elif response[0] == 'q':
+        print(f"Fine {player.name}, we didn't want you to play anyways")
+        break
+    elif len(response) > 1:
         verb = response[0]
-        item_name = response[1]
+        item_name = ' '.join(response[1:])
 
         if verb == 'drop':
             item = player.get_item(item_name)
@@ -105,15 +113,18 @@ while True:
             item = room.get_item(item_name)
 
             print(
-                f'You inspect the {item.name} and recognize it as the {item.about}')
+                f'You inspect the {item.name} and recognize it as {item.about}')
             confirm = input(f'Would you like to take the {item.name}?\n')
 
             if confirm == 'yes':
                 item.on_take(player)
                 print(f"You took the {item.name}\n")
-
-            else:
+            elif confirm == 'q':
                 print(
-                    f"You left the {item.name} in the {player.location}\n")
+                    f"Fine {player.name}, we didn't want you to play anyways")
+                break
+        else:
+            print(
+                f"You left the {item.name} in the {player.location}\n")
     else:
         print("Sorry, that's not a valid command.\n")

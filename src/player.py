@@ -13,10 +13,18 @@ class Player:
         return self.current_room
 
     def change_room(self, direction):
-        path = direction[0] + '_to'
-        if self.current_room[path] == None:
-            print(f"{direction} is not a valid direction")
-        self.current_room = self.current_room[path]
+        # path = direction[0] + '_to'
+        if direction == 'north':
+            self.current_room = self.current_room.n_to
+        elif direction == 'south':
+            self.current_room = self.current_room.s_to
+        elif direction == 'east':
+            self.current_room = self.current_room.e_to
+        elif direction == 'west':
+            self.current_room = self.current_room.w_to
+        # if self.current_room[path] == None:
+        #     print(f"{direction} is not a valid direction")
+        # self.current_room = self.current_room[path]
 
     # def pick_up(self, item_name):
     #     room = self.current_room
